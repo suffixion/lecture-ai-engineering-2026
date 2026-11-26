@@ -126,3 +126,12 @@ def search_graph(query: str) -> str:
         return json.dumps({"error": str(e)}, ensure_ascii=False)
     except APIError as e:
         return json.dumps({"error": api_error_message(e.code)}, ensure_ascii=False)
+def make_quiz(lecture_number: int) -> str:
+    """指定された講義回の復習クイズを1問返す。引数には講義の回番号を指定する。"""
+    questions = {
+        3: "エージェントが用語集ツールを呼び出した後、その結果は何に使われますか？",
+        6: "MCPサーバーに新しいツールを登録すると、エージェントはどうやって見つけますか？",
+    }
+    if lecture_number not in questions:
+        return f"第{lecture_number}回のクイズはありません。第3回または第6回を指定してください。"
+    return questions[lecture_number]
